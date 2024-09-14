@@ -2,11 +2,92 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RadialMaui.ImageControllerView"
-             Title="ImageControllerView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="ImageControllerView"
+             xmlns:viewmodel="clr-namespace:RadialMaui.ViewModels"
+             x:DataType="viewmodel:ImageControllerViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="5" Spacing="5">
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Image to Radial Fill" Style="{StaticResource SubHeadline}"/>
+                    <Grid ColumnDefinitions="0.3*, 0.7*"
+                                  RowDefinitions="1*, 1*, 1*, 1*, 1*, 1*, 1*, 1*, 1*"
+                                  RowSpacing="10"
+                                  ColumnSpacing="10">
+
+                        <Label Text="File Type" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="0"/>
+                        <Picker ItemsSource="{Binding FileTypePickerItems}"
+                                SelectedItem="{Binding FileTypeSelectedItem}"
+                                Title="Select File Type"
+                                Grid.Row="0"
+                                Grid.Column="1">
+                        </Picker>
+
+                        <Label Text="Min Threshold" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                        <Entry Text="{Binding MinThreshold}" Placeholder="{Binding MinThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+
+                        <Label Text="Max Threshold" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
+                        <Entry Text="{Binding MaxThreshold}" Placeholder="{Binding MaxThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+
+                        <Label Text="Invert" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
+                        <Picker ItemsSource="{Binding InvertPickerItems}"
+                                SelectedItem="{Binding InvertPickerSelectedItem}"
+                                Title="Select Whether to Invert"
+                                Grid.Row="3"
+                                Grid.Column="1">
+                        </Picker>
+
+                        <Label Text="Conversion Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="4"/>
+                        <Entry Text="{Binding ConversionAngleSteps}" Placeholder="{Binding ConversionAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="4"/>
+
+                        <Label Text="Conversion Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="5"/>
+                        <Entry Text="{Binding ConversionRadialSteps}" Placeholder="{Binding ConversionRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="5"/>
+
+                        <Label Text="Printer Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="6"/>
+                        <Entry Text="{Binding PrinterAngleSteps}" Placeholder="{Binding PrinterAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="6"/>
+
+                        <Label Text="Printer Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="7"/>
+                        <Entry Text="{Binding PrinterRadialSteps}" Placeholder="{Binding PrinterRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="7"/>
+
+                        <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileRadialFillCommand}" Grid.Column="0" Grid.Row="8" />
+                        <Label Text="{Binding RadialFillFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="8"/>
+                    </Grid>
+                    <Button Text="Convert" Command="{Binding RadialFillCommand}"/>
+                    <Image Source="{Binding PreviewImageSource}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Image to GCode" Style="{StaticResource SubHeadline}"/>
+                    <Button Text="Covert" Command="{Binding ImageToGCodeCommand}"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Image to Edges" Style="{StaticResource SubHeadline}"/>
+                    <Button Text="Convert" Command="{Binding ImageToEdgesCommand}"/>
+                    <Image Source="{Binding EdgesPreviewImageSource}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Image to Edges GCode" Style="{StaticResource SubHeadline}"/>
+                    <Button Text="Convert" Command="{Binding ImageToEdgesGCodeCommand}"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Image to SVG" Style="{StaticResource SubHeadline}"/>
+                    <Button Text="Convert" Command="{Binding ImageToSVGCommand}"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Image to Edges SVG" Style="{StaticResource SubHeadline}"/>
+                    <Button Text="Convert" Command="{Binding ImageToEdgesSVGCommand}"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

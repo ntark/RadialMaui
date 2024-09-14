@@ -1,9 +1,13 @@
+using RadialMaui.ViewModels;
+
 namespace RadialMaui;
 
 public partial class SVGControllerView : ContentPage
 {
-    public SVGControllerView()
+    public SVGControllerView(SVGControllerViewModel sVGControllerViewModel)
     {
         InitializeComponent();
+
+        BindingContext = sVGControllerViewModel;
     }
 }

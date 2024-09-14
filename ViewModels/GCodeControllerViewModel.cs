@@ -17,9 +17,7 @@ namespace RadialMaui.ViewModels
     public partial class GCodeControllerViewModel : ObservableObject
     {
         private readonly HttpClient _httpClient;
-        private readonly IFileUtil _fileUtil;
-
-        private readonly string BaseUrl = "https://kvash.tar.ge/GCode/";
+        private readonly IFileService _fileService;
 
         #region observable Properties
 
@@ -36,10 +34,10 @@ namespace RadialMaui.ViewModels
         string? status;
 
         [ObservableProperty]
-        string latestFile;
+        string? latestFile;
 
         [ObservableProperty]
-        ImageSource previewImageSource;
+        ImageSource? previewImageSource;
 
         [ObservableProperty]
         string gCodePreviewButtonText;
@@ -80,13 +78,11 @@ namespace RadialMaui.ViewModels
 
         public GCodeControllerViewModel(
             HttpClient httpClient,
-            IFileUtil fileUtil
+            IFileService fileService
             )
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(BaseUrl);
-            _fileUtil = fileUtil;
-
+            _fileService = fileService;
 
             MaxDistanceDefault = "0.1";
             RadialStepsDefault = "-3500";
@@ -94,10 +90,6 @@ namespace RadialMaui.ViewModels
 
             RadialToXyFileName = "Choose a file";
             XyToRadialFileName = "Choose a file";
-
-            LatestFile = "Check to see";
-
-            PreviewImageSource = ImageSource.FromFile("gcodepreviewplaceholder.png");
 
             GCodePreviewButtonText = "Upload";
 
@@ -140,7 +132,7 @@ namespace RadialMaui.ViewModels
             {
                 Status = drawing ? "Starting..." : "Stopping...";
 
-                var values = new Dictionary<string, string>()
+                var values = new Dictionary<string, string?>()
                 {
                     { "drawing", drawing ? "true" : "false"}
                 };
@@ -224,13 +216,10 @@ namespace RadialMaui.ViewModels
                 fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
                 form.Add(fileContent, "file", fileName);
 
-                var radialSteps = string.IsNullOrEmpty(RadialToXyRadialSteps) ? RadialStepsDefault : RadialToXyRadialSteps;
-                var angleSteps = string.IsNullOrEmpty(RadialToXyAngleSteps) ? AngleStepsDefault : RadialToXyAngleSteps;
-
-                var values = new Dictionary<string, string>()
+                var values = new Dictionary<string, string?>()
                 {
-                    { "radialSteps", radialSteps},
-                    { "angleSteps", angleSteps},
+                    { "radialSteps", RadialToXyRadialSteps},
+                    { "angleSteps", RadialToXyAngleSteps},
                 };
 
                 var queryParams = APIUtil.EncodeQueryParams(values);
@@ -239,7 +228,7 @@ namespace RadialMaui.ViewModels
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var filePath = await _fileUtil.HandleDownload(response);
+                    var filePath = await _fileService.HandleDownload(response);
 
                     UIUtil.DisplayPopup("Success", $"file {Path.GetFileName(filePath)} {Environment.NewLine}was saved to {Environment.NewLine}{filePath}", "OK");
                 }
@@ -302,15 +291,11 @@ namespace RadialMaui.ViewModels
                 fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
                 form.Add(fileContent, "file", fileName);
 
-                var maxDistance = string.IsNullOrEmpty(XyToRadialMaxDistance) ? MaxDistanceDefault : XyToRadialMaxDistance;
-                var radialSteps = string.IsNullOrEmpty(XyToRadialRadialSteps) ? RadialStepsDefault : XyToRadialRadialSteps;
-                var angleSteps = string.IsNullOrEmpty(XyToRadialAngleSteps) ? AngleStepsDefault : XyToRadialAngleSteps;
-
-                var values = new Dictionary<string, string>()
+                var values = new Dictionary<string, string?>()
                 {
-                    { "maxDistance", maxDistance},
-                    { "radialSteps", radialSteps},
-                    { "angleSteps", angleSteps},
+                    { "maxDistance", XyToRadialMaxDistance},
+                    { "radialSteps", XyToRadialRadialSteps},
+                    { "angleSteps", XyToRadialAngleSteps},
                 };
 
                 var queryParams = APIUtil.EncodeQueryParams(values);
@@ -319,7 +304,7 @@ namespace RadialMaui.ViewModels
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var filePath = await _fileUtil.HandleDownload(response);
+                    var filePath = await _fileService.HandleDownload(response);
 
                     UIUtil.DisplayPopup("Success", $"file {Path.GetFileName(filePath)} {Environment.NewLine}was inserted into printer queue and was saved to {Environment.NewLine}{filePath}", "OK");
                 }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace RadialMaui.Interfaces
 {
-    public interface IFileUtil
+    public interface IFileService
     {
         public Task<string> HandleDownload(HttpResponseMessage response);
+        public Task ConvertFile(string endpoint, HttpClient client);
     }
 }

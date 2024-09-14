@@ -36,64 +36,57 @@
             </Frame>
             <Frame>
                 <VerticalStackLayout Spacing="20">
-                    <Label Text="Transform" Style="{StaticResource Headline}"/>
-
-                    <Frame BackgroundColor="DarkGray">
-                        <VerticalStackLayout Spacing="20">
-                            <Grid ColumnDefinitions="0.3*, 0.7*"
+                    <Grid ColumnDefinitions="0.3*, 0.7*"
                                   RowDefinitions="1*, 1*, 1*, 1*, 1*"
                                   RowSpacing="10"
                                   ColumnSpacing="10">
 
-                                <Label Text="Radial to XY" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
+                        <Label Text="Radial to XY" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
 
-                                <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
-                                <Entry Text="{Binding RadialToXyRadialSteps}" Placeholder="{Binding RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                        <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                        <Entry Text="{Binding RadialToXyRadialSteps}" Placeholder="{Binding RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
 
-                                <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
-                                <Entry Text="{Binding RadialToXyAngleSteps}" Placeholder="{Binding AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+                        <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
+                        <Entry Text="{Binding RadialToXyAngleSteps}" Placeholder="{Binding AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
-                                <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileRadialToXyCommand}" Grid.Column="0" Grid.Row="3" />
-                                <Label Text="{Binding RadialToXyFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="3"/>
+                        <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileRadialToXyCommand}" Grid.Column="0" Grid.Row="3" />
+                        <Label Text="{Binding RadialToXyFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="3"/>
 
-                                <Button Text="Execute" BackgroundColor="ForestGreen"  Command ="{Binding RadialToXYCommand}" Grid.ColumnSpan="2" Grid.Row="4" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
+                        <Button Text="Execute" Command ="{Binding RadialToXYCommand}" Grid.ColumnSpan="2" Grid.Row="4" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
 
-                    <Frame BackgroundColor="DarkGray">
-                        <VerticalStackLayout Spacing="20">
-                            <Grid ColumnDefinitions="0.3*, 0.7*"
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Grid ColumnDefinitions="0.3*, 0.7*"
                                   RowDefinitions="1*, 1*, 1*, 1*, 1*, 1*"
                                   RowSpacing="10"
                                   ColumnSpacing="10">
 
-                                <Label Text="XY to Radial" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
+                        <Label Text="XY to Radial" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
 
-                                <Label Text="Max Distance" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
-                                <Entry Text="{Binding XyToRadialMaxDistance}" Placeholder="{Binding MaxDistanceDefault}"  TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                        <Label Text="Max Distance" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                        <Entry Text="{Binding XyToRadialMaxDistance}" Placeholder="{Binding MaxDistanceDefault}"  TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
 
-                                <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
-                                <Entry Text="{Binding XyToRadialRadialSteps}" Placeholder="{Binding RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+                        <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
+                        <Entry Text="{Binding XyToRadialRadialSteps}" Placeholder="{Binding RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
-                                <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
-                                <Entry Text="{Binding XyToRadialAngleSteps}" Placeholder="{Binding AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="3"/>
+                        <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
+                        <Entry Text="{Binding XyToRadialAngleSteps}" Placeholder="{Binding AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="3"/>
 
-                                <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileXyToRadialCommand}" Grid.Column="0" Grid.Row="4" />
-                                <Label Text="{Binding XyToRadialFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="4"/>
+                        <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileXyToRadialCommand}" Grid.Column="0" Grid.Row="4" />
+                        <Label Text="{Binding XyToRadialFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="4"/>
 
-                                <Button Text="Execute" BackgroundColor="ForestGreen"  Command ="{Binding XyToRadialCommand}" Grid.ColumnSpan="2" Grid.Row="5" />
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
-
+                        <Button Text="Execute" Command ="{Binding XyToRadialCommand}" Grid.ColumnSpan="2" Grid.Row="5" />
+                    </Grid>
                 </VerticalStackLayout>
             </Frame>
             <Frame>
                 <VerticalStackLayout Spacing="20">
+                    <Label Text="GCode Preview" Style="{StaticResource Headline}"/>
                     <Image Source="{Binding PreviewImageSource}" />
                     <Button Text="{Binding GCodePreviewButtonText}" Command="{Binding GCodePreviewButtonCommand}"/>
-
                 </VerticalStackLayout>
             </Frame>
             <Frame>
