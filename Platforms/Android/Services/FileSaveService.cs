@@ -1,41 +1,36 @@
-﻿using Android.OS;
+﻿using Android.App;
+using Android.Content;
+using Android.OS;
 using RadialMaui.Interfaces;
 using RadialMaui.Platforms;
+using System.Formats.Asn1;
 using Environment = Android.OS.Environment;
 
 namespace RadialMaui.Platforms
 {
     public class FileSaveService : IFileSaveService
     {
-        public string GetDownloadPath()
+        public string DownloadFile(string filename, HttpResponseMessage response)
         {
-            var writeStatus = Permissions.CheckStatusAsync<Permissions.StorageWrite>().GetAwaiter().GetResult();
+            var context = Android.App.Application.Context;
+            var downloadManager = (DownloadManager?)context.GetSystemService(Context.DownloadService);
 
-            if (writeStatus != PermissionStatus.Granted)
+            if (downloadManager == null)
             {
-                writeStatus = Permissions.RequestAsync<Permissions.StorageWrite>().GetAwaiter().GetResult();
+                throw new Exception("unable to access download manager");
             }
 
-            var readStatus = Permissions.CheckStatusAsync<Permissions.StorageRead>().GetAwaiter().GetResult();
+            var url = $"https://kvash.tar.ge/File?fileName={filename}";
 
-            if (readStatus != PermissionStatus.Granted)
-            {
-                readStatus = Permissions.RequestAsync<Permissions.StorageRead>().GetAwaiter().GetResult();
-            }
+            var request = new DownloadManager.Request(Android.Net.Uri.Parse(url));
+            request.SetTitle(filename);
+            request.SetDescription("downloading ...");
+            request.SetNotificationVisibility(DownloadVisibility.VisibleNotifyCompleted);
+            request.SetDestinationInExternalPublicDir(Environment.DirectoryDownloads, filename);
 
-            if (readStatus != PermissionStatus.Granted || writeStatus != PermissionStatus.Granted)
-            {
-                throw new Exception("No rights to save to file storage");
-            }
+            downloadManager.Enqueue(request);
 
-            var folder = Android.App.Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDocuments);
-
-            if (folder == null)
-            {
-                throw new Exception("download folder not found");
-            }
-            
-            return folder.AbsolutePath;
+            return Path.Join(Environment.DirectoryDownloads, filename);
         }
     }
 }

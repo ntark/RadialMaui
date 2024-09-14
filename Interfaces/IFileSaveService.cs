@@ -8,6 +8,6 @@ namespace RadialMaui.Interfaces
 {
     public interface IFileSaveService
     {
-        string GetDownloadPath();
+        string DownloadFile(string filename, HttpResponseMessage response);
     }
 }

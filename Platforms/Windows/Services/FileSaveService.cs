@@ -10,9 +10,19 @@ namespace RadialMaui.Platforms
 {
     public class FileSaveService : IFileSaveService
     {
-        public string GetDownloadPath()
+        public string DownloadFile(string filename, HttpResponseMessage response)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+            var fileBytes = response.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+
+            var filePath = Path.Combine(folderPath, filename);
+
+            using var fileWriteStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+
+            fileWriteStream.WriteAsync(fileBytes, 0, fileBytes.Length).GetAwaiter().GetResult();
+
+            return filePath;
         }
     }
 }

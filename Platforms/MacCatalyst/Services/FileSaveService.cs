@@ -9,7 +9,7 @@ namespace RadialMaui.Platforms
 {
     public class FileSaveService : IFileSaveService
     {
-        public string GetDownloadPath()
+        public string DownloadFile(string filename, HttpResponseMessage response)
         {
             throw new NotImplementedException();
         }

@@ -28,14 +28,7 @@ namespace RadialMaui.Services
                 throw new Exception("returned file has no name");
             }
 
-            var fileBytes = await response.Content.ReadAsByteArrayAsync();
-
-            var downloadPath = _fileSaveService.GetDownloadPath();
-            var filePath = Path.Combine(downloadPath, responseFileName);
-
-            using var fileWriteStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-
-            await fileWriteStream.WriteAsync(fileBytes, 0, fileBytes.Length);
+            var filePath = _fileSaveService.DownloadFile(responseFileName, response);
 
             return filePath;
         }
