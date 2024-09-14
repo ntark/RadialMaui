@@ -7,9 +7,26 @@
     Shell.FlyoutBehavior="Disabled"
     Title="RadialMaui">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+
+    <TabBar>
+        <Tab Title="GCode">
+            <ShellContent
+                Title="GCode Controller"
+                ContentTemplate="{DataTemplate local:GCodeControllerView}"
+                Route="GCodeControllerView" />
+        </Tab>
+        <Tab Title="Images">
+            <ShellContent
+                Title="Image Controller"
+                ContentTemplate="{DataTemplate local:ImageControllerView}"
+                Route="ImageControllerView" />
+        </Tab>
+        <Tab Title="SVG">
+            <ShellContent
+                Title="SVG Controller"
+                ContentTemplate="{DataTemplate local:SVGControllerView}"
+                Route="SVGControllerView" />
+        </Tab>
+    </TabBar>
 
 </Shell>

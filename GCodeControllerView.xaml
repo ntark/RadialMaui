@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RadialMaui.GCodeControllerView"
+             Title="GCodeControllerView"
+             xmlns:viewmodel="clr-namespace:RadialMaui.ViewModels"
+             x:DataType="viewmodel:GCodeControllerViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="5" Spacing="5">
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Draw state" Style="{StaticResource Headline}"/>
+                    <Grid ColumnDefinitions="0.5*, 0.5*"
+                          ColumnSpacing="10"
+                          Grid.Row="0">
+                        <Button Text="Start!" Grid.Column="0" Command="{Binding StartDrawingCommand}"/>
+                        <Button Text="Stop!" Grid.Column="1" Command="{Binding StopDrawingCommand}"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="0.3*, 0.4*, 0.3*"
+                          Grid.Row="1"
+                          ColumnSpacing="10">
+
+                        <Label Text="Current:" FontSize="25" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                        <Frame Grid.Column="1"
+                               BackgroundColor="Green">
+                            <Label Text="{Binding Status}" FontSize="25"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Frame>
+
+                        <Button Text="Re-Check" Grid.Column="2" Command="{Binding ReCheckCommand}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Transform" Style="{StaticResource Headline}"/>
+
+                    <Frame BackgroundColor="DarkGray">
+                        <VerticalStackLayout Spacing="20">
+                            <Grid ColumnDefinitions="0.3*, 0.7*"
+                                  RowDefinitions="1*, 1*, 1*, 1*, 1*"
+                                  RowSpacing="10"
+                                  ColumnSpacing="10">
+
+                                <Label Text="Radial to XY" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+                                <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                                <Entry Text="{Binding RadialToXyRadialSteps}" Placeholder="{Binding RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+
+                                <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
+                                <Entry Text="{Binding RadialToXyAngleSteps}" Placeholder="{Binding AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+
+                                <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileRadialToXyCommand}" Grid.Column="0" Grid.Row="3" />
+                                <Label Text="{Binding RadialToXyFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="3"/>
+
+                                <Button Text="Execute" BackgroundColor="ForestGreen"  Command ="{Binding RadialToXYCommand}" Grid.ColumnSpan="2" Grid.Row="4" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame BackgroundColor="DarkGray">
+                        <VerticalStackLayout Spacing="20">
+                            <Grid ColumnDefinitions="0.3*, 0.7*"
+                                  RowDefinitions="1*, 1*, 1*, 1*, 1*, 1*"
+                                  RowSpacing="10"
+                                  ColumnSpacing="10">
+
+                                <Label Text="XY to Radial" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+                                <Label Text="Max Distance" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                                <Entry Text="{Binding XyToRadialMaxDistance}" Placeholder="{Binding MaxDistanceDefault}"  TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+
+                                <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
+                                <Entry Text="{Binding XyToRadialRadialSteps}" Placeholder="{Binding RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+
+                                <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
+                                <Entry Text="{Binding XyToRadialAngleSteps}" Placeholder="{Binding AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="3"/>
+
+                                <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileXyToRadialCommand}" Grid.Column="0" Grid.Row="4" />
+                                <Label Text="{Binding XyToRadialFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="4"/>
+
+                                <Button Text="Execute" BackgroundColor="ForestGreen"  Command ="{Binding XyToRadialCommand}" Grid.ColumnSpan="2" Grid.Row="5" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Image Source="{Binding PreviewImageSource}" />
+                    <Button Text="{Binding GCodePreviewButtonText}" Command="{Binding GCodePreviewButtonCommand}"/>
+
+                </VerticalStackLayout>
+            </Frame>
+            <Frame>
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="Check Latest" Style="{StaticResource Headline}"/>
+                    <Button Text="Check!" Grid.Column="0" Command="{Binding FetchLatestCommand}"/>
+                    <Label Text="{Binding LatestFile}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
