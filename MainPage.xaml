@@ -7,24 +7,6 @@
           RowSpacing="10"
           ColumnSpacing="10">
 
-        <Image Source="lekva.jpg"
-               Aspect="Fill"
-               Grid.Row="0"/>
-
-        <Grid ColumnDefinitions="0.33*, 0.34*, 0.33*"
-              ColumnSpacing="10"
-              Grid.Row="1">
-            <Image Source="lekva.jpg"
-                   Aspect="Fill"
-                   Grid.Column="0"/>
-            <Image Source="lekva.jpg"
-                   Aspect="Fill"
-                   Grid.Column="1"/>
-            <Image Source="lekva.jpg"
-                   Aspect="Fill"
-                   Grid.Column="2"/>
-        </Grid>
-
     </Grid>
 
 </ContentPage>
