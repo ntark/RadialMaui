@@ -64,13 +64,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="GCodeControllerView.xaml">
+	  <MauiXaml Update="Views\GCodeControllerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ImageControllerView.xaml">
+	  <MauiXaml Update="Views\ImageControllerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="SVGControllerView.xaml">
+	  <MauiXaml Update="Views\SVGControllerView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

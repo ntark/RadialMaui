@@ -1,6 +1,6 @@
 using RadialMaui.ViewModels;
 
-namespace RadialMaui;
+namespace RadialMaui.Views;
 
 public partial class GCodeControllerView : ContentPage
 {
