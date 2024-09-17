@@ -20,13 +20,13 @@ namespace RadialMaui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddTransient<GCodeControllerView>();
-            builder.Services.AddTransient<ImageControllerView>();
-            builder.Services.AddTransient<SVGControllerView>();
+            builder.Services.AddSingleton<GCodeControllerView>();
+            builder.Services.AddSingleton<ImageControllerView>();
+            builder.Services.AddSingleton<SVGControllerView>();
 
-            builder.Services.AddTransient<GCodeControllerViewModel>();
-            builder.Services.AddTransient<ImageControllerViewModel>();
-            builder.Services.AddTransient<SVGControllerViewModel>();
+            builder.Services.AddSingleton<GCodeControllerViewModel>();
+            builder.Services.AddSingleton<ImageControllerViewModel>();
+            builder.Services.AddSingleton<SVGControllerViewModel>();
 
             builder.Services.AddHttpClient<GCodeControllerViewModel>(client =>
             {
