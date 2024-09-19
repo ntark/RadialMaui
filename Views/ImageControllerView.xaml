@@ -25,10 +25,10 @@
                         </Picker>
 
                         <Label Text="Min Threshold" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
-                        <Entry Text="{Binding ImageToRadialFill.MinThreshold}" Placeholder="{Binding ImageToRadialFill.MinThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                        <Entry Text="{Binding ImageToRadialFill.MinThreshold}" Placeholder="{Binding ImageToRadialFill.MinThresholdDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
 
                         <Label Text="Max Threshold" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
-                        <Entry Text="{Binding ImageToRadialFill.MaxThreshold}" Placeholder="{Binding ImageToRadialFill.MaxThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+                        <Entry Text="{Binding ImageToRadialFill.MaxThreshold}" Placeholder="{Binding ImageToRadialFill.MaxThresholdDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
                         <Label Text="Invert" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
                         <Picker ItemsSource="{Binding ImageToRadialFill.InvertPickerItems}"
@@ -39,16 +39,16 @@
                         </Picker>
 
                         <Label Text="Conversion Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="4"/>
-                        <Entry Text="{Binding ImageToRadialFill.ConversionAngleSteps}" Placeholder="{Binding ImageToRadialFill.ConversionAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="4"/>
+                        <Entry Text="{Binding ImageToRadialFill.ConversionAngleSteps}" Placeholder="{Binding ImageToRadialFill.ConversionAngleStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="4"/>
 
                         <Label Text="Conversion Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="5"/>
-                        <Entry Text="{Binding ImageToRadialFill.ConversionRadialSteps}" Placeholder="{Binding ImageToRadialFill.ConversionRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="5"/>
+                        <Entry Text="{Binding ImageToRadialFill.ConversionRadialSteps}" Placeholder="{Binding ImageToRadialFill.ConversionRadialStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="5"/>
 
                         <Label Text="Printer Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="6"/>
-                        <Entry Text="{Binding ImageToRadialFill.AngleSteps}" Placeholder="{Binding ImageToRadialFill.PrinterAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="6"/>
+                        <Entry Text="{Binding ImageToRadialFill.AngleSteps}" Placeholder="{Binding ImageToRadialFill.PrinterAngleStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="6"/>
 
                         <Label Text="Printer Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="7"/>
-                        <Entry Text="{Binding ImageToRadialFill.RadialSteps}" Placeholder="{Binding ImageToRadialFill.PrinterRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="7"/>
+                        <Entry Text="{Binding ImageToRadialFill.RadialSteps}" Placeholder="{Binding ImageToRadialFill.PrinterRadialStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="7"/>
 
                         <Button Text="Pick file" BackgroundColor="{StaticResource SecondaryDark200}" Command="{Binding PickFileRadialFillCommand}" Grid.Column="0" Grid.Row="8"/>
                         <Label Text="{Binding ImageToRadialFill.FileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="8"/>

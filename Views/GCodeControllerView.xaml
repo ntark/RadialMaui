@@ -28,11 +28,8 @@
                             <Frame Grid.Column="1"
                                    Padding="5"
                                    BackgroundColor="{StaticResource SecondaryDark100}">
-                                <Frame Padding="5">
-                                    <Label Text="{Binding Status}" FontSize="25"
+                                <Label Text="{Binding Status}" FontSize="25"
                                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                    
-                                </Frame>
                             </Frame>
 
                             <Button Text="Re-Check" Grid.Column="2" Command="{Binding ReCheckCommand}"/>
@@ -49,10 +46,10 @@
                             <Label Text="Radial to XY" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
 
                             <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
-                            <Entry Text="{Binding RadialToXy.RadialSteps}" Placeholder="{Binding RadialToXy.RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                            <Entry Text="{Binding RadialToXy.RadialSteps}" Placeholder="{Binding RadialToXy.RadialStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
 
                             <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
-                            <Entry Text="{Binding RadialToXy.AngleSteps}" Placeholder="{Binding RadialToXy.AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+                            <Entry Text="{Binding RadialToXy.AngleSteps}" Placeholder="{Binding RadialToXy.AngleStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
                             <Button Text="Pick file" BackgroundColor="{StaticResource SecondaryDark200}" Command="{Binding PickFileRadialToXyCommand}" Grid.Column="0" Grid.Row="3" />
                             <Label Text="{Binding RadialToXy.FileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="3"/>
@@ -72,13 +69,13 @@
                             <Label Text="XY to Radial" Style="{StaticResource SubHeadline}" Grid.ColumnSpan="2" Grid.Row="0"/>
 
                             <Label Text="Max Distance" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
-                            <Entry Text="{Binding XyToRadial.MaxDistance}" Placeholder="{Binding XyToRadial.MaxDistanceDefault}"  TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                            <Entry Text="{Binding XyToRadial.MaxDistance}" Placeholder="{Binding XyToRadial.MaxDistanceDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
 
                             <Label Text="Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
-                            <Entry Text="{Binding XyToRadial.RadialSteps}" Placeholder="{Binding XyToRadial.RadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+                            <Entry Text="{Binding XyToRadial.RadialSteps}" Placeholder="{Binding XyToRadial.RadialStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
                             <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
-                            <Entry Text="{Binding XyToRadial.AngleSteps}" Placeholder="{Binding XyToRadial.AngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="3"/>
+                            <Entry Text="{Binding XyToRadial.AngleSteps}" Placeholder="{Binding XyToRadial.AngleStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="3"/>
 
                             <Button Text="Pick file" BackgroundColor="{StaticResource SecondaryDark200}" Command="{Binding PickFileXyToRadialCommand}" Grid.Column="0" Grid.Row="4" />
                             <Label Text="{Binding XyToRadial.FileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="4"/>
