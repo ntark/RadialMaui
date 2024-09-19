@@ -4,26 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RadialMaui.Views"
-    Shell.FlyoutBehavior="Disabled"
     Title="RadialMaui">
 
-
     <TabBar>
-        <Tab Title="GCode">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:GCodeControllerView}"
-                Route="GCodeControllerView" />
-        </Tab>
-        <Tab Title="Images">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:ImageControllerView}"
-                Route="ImageControllerView" />
-        </Tab>
-        <Tab Title="SVG">
-            <ShellContent
-                ContentTemplate="{DataTemplate local:SVGControllerView}"
-                Route="SVGControllerView" />
-        </Tab>
+        <ShellContent ContentTemplate="{DataTemplate local:GCodeControllerView}"
+                      Route="GCodeControllerView" 
+                      Title="GCode"
+                      Icon="gcode.png"/>
+        <ShellContent ContentTemplate="{DataTemplate local:ImageControllerView}"
+                      Route="ImageControllerView" 
+                      Title="Image"
+                      Icon="image.png"/>
+        <ShellContent ContentTemplate="{DataTemplate local:SVGControllerView}" 
+                      Route="SVGControllerView"
+                      Title="SVG"
+                      Icon="svg.png" />
     </TabBar>
 
 </Shell>

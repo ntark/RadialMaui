@@ -17,43 +17,43 @@
                                   ColumnSpacing="10">
 
                         <Label Text="File Type" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="0"/>
-                        <Picker ItemsSource="{Binding FileTypePickerItems}"
-                                SelectedItem="{Binding FileTypeSelectedItem}"
+                        <Picker ItemsSource="{Binding ImageToRadialFill.FileTypePickerItems}"
+                                SelectedItem="{Binding ImageToRadialFill.FileTypeSelectedItem}"
                                 Title="Select File Type"
                                 Grid.Row="0"
                                 Grid.Column="1">
                         </Picker>
 
                         <Label Text="Min Threshold" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="1"/>
-                        <Entry Text="{Binding MinThreshold}" Placeholder="{Binding MinThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                        <Entry Text="{Binding ImageToRadialFill.MinThreshold}" Placeholder="{Binding ImageToRadialFill.MinThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
 
                         <Label Text="Max Threshold" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
-                        <Entry Text="{Binding MaxThreshold}" Placeholder="{Binding MaxThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
+                        <Entry Text="{Binding ImageToRadialFill.MaxThreshold}" Placeholder="{Binding ImageToRadialFill.MaxThresholdDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
                         <Label Text="Invert" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
-                        <Picker ItemsSource="{Binding InvertPickerItems}"
-                                SelectedItem="{Binding InvertPickerSelectedItem}"
+                        <Picker ItemsSource="{Binding ImageToRadialFill.InvertPickerItems}"
+                                SelectedItem="{Binding ImageToRadialFill.InvertPickerSelectedItem}"
                                 Title="Select Whether to Invert"
                                 Grid.Row="3"
                                 Grid.Column="1">
                         </Picker>
 
                         <Label Text="Conversion Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="4"/>
-                        <Entry Text="{Binding ConversionAngleSteps}" Placeholder="{Binding ConversionAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="4"/>
+                        <Entry Text="{Binding ImageToRadialFill.ConversionAngleSteps}" Placeholder="{Binding ImageToRadialFill.ConversionAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="4"/>
 
                         <Label Text="Conversion Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="5"/>
-                        <Entry Text="{Binding ConversionRadialSteps}" Placeholder="{Binding ConversionRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="5"/>
+                        <Entry Text="{Binding ImageToRadialFill.ConversionRadialSteps}" Placeholder="{Binding ImageToRadialFill.ConversionRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="5"/>
 
                         <Label Text="Printer Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="6"/>
-                        <Entry Text="{Binding PrinterAngleSteps}" Placeholder="{Binding PrinterAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="6"/>
+                        <Entry Text="{Binding ImageToRadialFill.AngleSteps}" Placeholder="{Binding ImageToRadialFill.PrinterAngleStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="6"/>
 
                         <Label Text="Printer Radial Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="7"/>
-                        <Entry Text="{Binding PrinterRadialSteps}" Placeholder="{Binding PrinterRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="7"/>
+                        <Entry Text="{Binding ImageToRadialFill.RadialSteps}" Placeholder="{Binding ImageToRadialFill.PrinterRadialStepsDefault}" TextColor="White" Keyboard="Numeric" Grid.Column="1" Grid.Row="7"/>
 
-                        <Button Text="Pick file" BackgroundColor="GreenYellow" Command="{Binding PickFileRadialFillCommand}" Grid.Column="0" Grid.Row="8" />
-                        <Label Text="{Binding RadialFillFileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="8"/>
+                        <Button Text="Pick file" BackgroundColor="{StaticResource SecondaryDark200}" Command="{Binding PickFileRadialFillCommand}" Grid.Column="0" Grid.Row="8"/>
+                        <Label Text="{Binding ImageToRadialFill.FileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="8"/>
                     </Grid>
-                    <Button Text="Convert" Command="{Binding RadialFillCommand}"/>
+                    <Button Text="Convert" Command="{Binding RadialFillCommand}" IsEnabled="False"/>
                     <Image Source="{Binding PreviewImageSource}" />
                 </VerticalStackLayout>
             </Frame>

@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using RadialMaui.Interfaces;
+using RadialMaui.Models;
 using RadialMaui.Util;
 using System;
 using System.Collections.Generic;
@@ -14,21 +15,12 @@ using System.Web;
 
 namespace RadialMaui.ViewModels
 {
-    public partial class GCodeControllerViewModel : ObservableObject
+    public partial class GCodeControllerViewModel : BaseViewModel
     {
         private readonly HttpClient _httpClient;
         private readonly IFileService _fileService;
 
         #region observable Properties
-
-        [ObservableProperty]
-        string maxDistanceDefault;
-
-        [ObservableProperty]
-        string radialStepsDefault;
-
-        [ObservableProperty]
-        string angleStepsDefault;
 
         [ObservableProperty]
         string? status;
@@ -40,32 +32,13 @@ namespace RadialMaui.ViewModels
         ImageSource? previewImageSource;
 
         [ObservableProperty]
-        string gCodePreviewButtonText;
-
-        #region Radial To XY
-        [ObservableProperty]
-        string? radialToXyFileName;
+        string gCodePreviewButtonText = "Upload";
 
         [ObservableProperty]
-        string? radialToXyRadialSteps;
+        RadialToXyFields radialToXy = new RadialToXyFields();
 
         [ObservableProperty]
-        string? radialToXyAngleSteps;
-        #endregion
-
-        #region Radial To XY
-        [ObservableProperty]
-        string? xyToRadialFileName;
-
-        [ObservableProperty]
-        string? xyToRadialMaxDistance;
-
-        [ObservableProperty]
-        string? xyToRadialRadialSteps;
-
-        [ObservableProperty]
-        string? xyToRadialAngleSteps;
-        #endregion
+        XyToRadialFields xyToRadial = new XyToRadialFields();
 
         #endregion
 
@@ -84,14 +57,8 @@ namespace RadialMaui.ViewModels
             _httpClient = httpClient;
             _fileService = fileService;
 
-            MaxDistanceDefault = "0.1";
-            RadialStepsDefault = "-3500";
-            AngleStepsDefault = "27800";
-
-            RadialToXyFileName = "Choose a file";
-            XyToRadialFileName = "Choose a file";
-
-            GCodePreviewButtonText = "Upload";
+            RadialToXy.FileName = "Choose a file";
+            XyToRadial.FileName = "Choose a file";
 
             _ = ReCheck();
         }
@@ -101,7 +68,8 @@ namespace RadialMaui.ViewModels
         {
             try
             {
-                Status = "checking...";
+                IsBusy = true;
+                Status = "checking";
 
                 var response = await _httpClient.PostAsync("drawing", null);
 
@@ -120,9 +88,13 @@ namespace RadialMaui.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error...";
+                Status = "Error";
 
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -130,7 +102,8 @@ namespace RadialMaui.ViewModels
         {
             try
             {
-                Status = drawing ? "Starting..." : "Stopping...";
+                IsBusy = true;
+                Status = drawing ? "Starting" : "Stopping";
 
                 var values = new Dictionary<string, string?>()
                 {
@@ -143,7 +116,7 @@ namespace RadialMaui.ViewModels
 
                 if (response.IsSuccessStatusCode)
                 {
-                    _ = ReCheck();
+                    await ReCheck().ConfigureAwait(false);
                 }
                 else
                 {
@@ -154,9 +127,13 @@ namespace RadialMaui.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error...";
+                Status = "Error";
 
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -187,12 +164,10 @@ namespace RadialMaui.ViewModels
                 var fileName = result.FileName;
 
                 RadialToXyFileResult = result;
-                RadialToXyFileName = fileName;
+                RadialToXy.FileName = fileName;
             }
             catch (Exception ex)
             {
-                Status = "Error...";
-
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
             }
         }
@@ -202,25 +177,21 @@ namespace RadialMaui.ViewModels
         {
             try
             {
+                IsBusy = true;
                 if (RadialToXyFileResult == null)
                 {
                     throw new Exception("No file selected");
                 }
 
-                using var stream = await RadialToXyFileResult.OpenReadAsync();
-                var fileName = RadialToXyFileResult.FileName;
-
-                var form = new MultipartFormDataContent();
-
-                var fileContent = new StreamContent(stream);
-                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-                form.Add(fileContent, "file", fileName);
-
                 var values = new Dictionary<string, string?>()
                 {
-                    { "radialSteps", RadialToXyRadialSteps},
-                    { "angleSteps", RadialToXyAngleSteps},
+                    { "radialSteps", RadialToXy.RadialSteps},
+                    { "angleSteps", RadialToXy.AngleSteps},
                 };
+
+                using var stream = await RadialToXyFileResult.OpenReadAsync();
+
+                var form = APIUtil.MultipartFileForm(RadialToXyFileResult.FileName, stream);
 
                 var queryParams = APIUtil.EncodeQueryParams(values);
 
@@ -241,9 +212,11 @@ namespace RadialMaui.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error...";
-
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -262,40 +235,34 @@ namespace RadialMaui.ViewModels
                 var fileName = result.FileName;
 
                 XyToRadialFileResult = result;
-                XyToRadialFileName = fileName;
+                XyToRadial.FileName = fileName;
             }
             catch (Exception ex)
             {
-                Status = "Error...";
-
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
             }
         }
 
         [RelayCommand]
-        async Task XyToRadial()
+        async Task XYToRadial()
         {
             try
             {
+                IsBusy = true;
                 if (XyToRadialFileResult == null)
                 {
                     throw new Exception("No file selected");
                 }
 
                 using var stream = await XyToRadialFileResult.OpenReadAsync();
-                var fileName = XyToRadialFileResult.FileName;
 
-                var form = new MultipartFormDataContent();
-
-                var fileContent = new StreamContent(stream);
-                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-                form.Add(fileContent, "file", fileName);
+                var form = APIUtil.MultipartFileForm(XyToRadialFileResult.FileName, stream);
 
                 var values = new Dictionary<string, string?>()
                 {
-                    { "maxDistance", XyToRadialMaxDistance},
-                    { "radialSteps", XyToRadialRadialSteps},
-                    { "angleSteps", XyToRadialAngleSteps},
+                    { "maxDistance", XyToRadial.MaxDistance},
+                    { "radialSteps", XyToRadial.RadialSteps},
+                    { "angleSteps", XyToRadial.AngleSteps},
                 };
 
                 var queryParams = APIUtil.EncodeQueryParams(values);
@@ -317,9 +284,11 @@ namespace RadialMaui.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error...";
-
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -328,6 +297,7 @@ namespace RadialMaui.ViewModels
         {
             try
             {
+                IsBusy = true;
                 var response = await _httpClient.PostAsync($"fetchLatest", null);
 
                 if (response.IsSuccessStatusCode)
@@ -343,9 +313,11 @@ namespace RadialMaui.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error...";
-
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -354,6 +326,7 @@ namespace RadialMaui.ViewModels
         {
             try
             {
+                IsBusy = true;
                 var result = await FilePicker.PickAsync();
 
                 if (result == null)
@@ -388,12 +361,14 @@ namespace RadialMaui.ViewModels
             }
             catch (Exception ex)
             {
-                Status = "Error...";
-
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
             }
+            finally
+            {
+                IsBusy = false;
+                GCodePreviewButtonText = "Upload";
+            }
 
-            GCodePreviewButtonText = "Upload";
         }
     }
 }

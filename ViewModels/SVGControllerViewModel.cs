@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RadialMaui.ViewModels
 {
-    public partial class SVGControllerViewModel : ObservableObject
+    public partial class SVGControllerViewModel : BaseViewModel
     {
         private readonly HttpClient _httpClient;
         private readonly IFileService _fileService;

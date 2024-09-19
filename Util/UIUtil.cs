@@ -10,10 +10,7 @@ namespace RadialMaui.Util
     {
         public static async void DisplayPopup(string title, string message, string buttonText)
         {
-            if (App.Current?.MainPage != null)
-            {
-                await App.Current.MainPage.DisplayAlert(title, message, buttonText);
-            }
+            await Shell.Current.DisplayAlert(title, message, buttonText);
         }
     }
 }

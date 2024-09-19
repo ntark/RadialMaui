@@ -35,36 +35,29 @@ namespace RadialMaui.Services
 
         public async Task ConvertFile(string endpoint, HttpClient httpClient)
         {
-            try
+            var result = await FilePicker.PickAsync();
+
+            if (result == null)
             {
-                var result = await FilePicker.PickAsync();
-
-                if (result == null)
-                {
-                    return;
-                }
-
-                var fileName = result.FileName;
-                using var stream = await result.OpenReadAsync();
-
-                var form = APIUtil.MultipartFileForm(fileName, stream);
-
-                var response = await httpClient.PostAsync(endpoint, form);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var filePath = await HandleDownload(response);
-                    UIUtil.DisplayPopup("Success", $"file {Path.GetFileName(filePath)} {Environment.NewLine}was saved to {Environment.NewLine}{filePath}", "OK");
-                }
-                else
-                {
-                    var errorMessage = await response.Content.ReadAsStringAsync();
-                    throw new Exception(errorMessage);
-                }
+                return;
             }
-            catch (Exception ex)
+
+            var fileName = result.FileName;
+            using var stream = await result.OpenReadAsync();
+
+            var form = APIUtil.MultipartFileForm(fileName, stream);
+
+            var response = await httpClient.PostAsync(endpoint, form);
+
+            if (response.IsSuccessStatusCode)
             {
-                UIUtil.DisplayPopup("Error", ex.Message, "OK");
+                var filePath = await HandleDownload(response);
+                UIUtil.DisplayPopup("Success", $"file {Path.GetFileName(filePath)} {Environment.NewLine}was saved to {Environment.NewLine}{filePath}", "OK");
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorMessage);
             }
         }
     }

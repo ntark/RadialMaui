@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RadialMaui.Interfaces;
+using RadialMaui.Models;
 using RadialMaui.Util;
 using System;
 using System.Collections.Generic;
@@ -13,69 +14,13 @@ using System.Threading.Tasks;
 
 namespace RadialMaui.ViewModels
 {
-    public partial class ImageControllerViewModel : ObservableObject
+    public partial class ImageControllerViewModel : BaseViewModel
     {
         HttpClient _httpClient;
         IFileService _fileService;
 
         [ObservableProperty]
-        public List<string> fileTypePickerItems = new List<string>()
-        {
-            "Preview",
-            "Instructions"
-        };
-
-        [ObservableProperty]
-        public List<string> invertPickerItems = new List<string>()
-        {
-            "true",
-            "false"
-        };
-
-        [ObservableProperty]
-        string? fileTypeSelectedItem;
-
-        [ObservableProperty]
-        string? minThreshold;
-
-        [ObservableProperty]
-        string? maxThreshold;
-
-        [ObservableProperty]
-        string? invertPickerSelectedItem;
-
-        [ObservableProperty]
-        string? conversionAngleSteps;
-
-        [ObservableProperty]
-        string? conversionRadialSteps;
-
-        [ObservableProperty]
-        string? printerAngleSteps;
-
-        [ObservableProperty] 
-        string? printerRadialSteps;
-
-        [ObservableProperty]
-        string? radialFillFileName;
-
-        [ObservableProperty]
-        string minThresholdDefault = "1";
-
-        [ObservableProperty]
-        string maxThresholdDefault = "250";
-
-        [ObservableProperty]
-        string conversionAngleStepsDefault = "1000";
-
-        [ObservableProperty]
-        string conversionRadialStepsDefault = "50";
-
-        [ObservableProperty]
-        string printerAngleStepsDefault = "-3500";
-
-        [ObservableProperty]
-        string printerRadialStepsDefault = "27800";
+        ImageToRadialFillFields imageToRadialFill = new ImageToRadialFillFields();
 
         [ObservableProperty]
         ImageSource? previewImageSource;
@@ -106,7 +51,7 @@ namespace RadialMaui.ViewModels
                 var fileName = result.FileName;
 
                 PickedFileForRadialFillResult = result;
-                RadialFillFileName = fileName;
+                ImageToRadialFill.FileName = fileName;
             }
             catch (Exception ex)
             {
@@ -119,6 +64,7 @@ namespace RadialMaui.ViewModels
         {
             try
             {
+                IsBusy = true;
                 if (PickedFileForRadialFillResult == null)
                 {
                     throw new Exception("No file selected");
@@ -131,14 +77,14 @@ namespace RadialMaui.ViewModels
 
                 var values = new Dictionary<string, string?>()
                 {
-                    { "fileType", FileTypeSelectedItem},
-                    { "minThreshold", MinThreshold},
-                    { "maxThreshold", MaxThreshold},
-                    { "invert", InvertPickerSelectedItem},
-                    { "angle_steps", ConversionAngleSteps},
-                    { "radius_steps", ConversionRadialSteps},
-                    { "RADIUS_STEPPER_STEPS", PrinterAngleSteps},
-                    { "ANGLE_STEPPER_STEPS", PrinterRadialSteps},
+                    { "fileType", ImageToRadialFill.FileTypeSelectedItem},
+                    { "minThreshold", ImageToRadialFill.MinThreshold},
+                    { "maxThreshold", ImageToRadialFill.MaxThreshold},
+                    { "invert", ImageToRadialFill.InvertPickerSelectedItem},
+                    { "angle_steps", ImageToRadialFill.ConversionAngleSteps},
+                    { "radius_steps", ImageToRadialFill.ConversionRadialSteps},
+                    { "RADIUS_STEPPER_STEPS", ImageToRadialFill.AngleSteps},
+                    { "ANGLE_STEPPER_STEPS", ImageToRadialFill.RadialSteps},
                 };
 
                 var queryParams = APIUtil.EncodeQueryParams(values); 
@@ -147,7 +93,7 @@ namespace RadialMaui.ViewModels
 
                 if (response.IsSuccessStatusCode)
                 {
-                    if(FileTypeSelectedItem == "Instructions")
+                    if(ImageToRadialFill.FileTypeSelectedItem == "Instructions")
                     {
                         var filePath = await _fileService.HandleDownload(response);
                         UIUtil.DisplayPopup("Success", $"file {Path.GetFileName(filePath)} {Environment.NewLine}was inserted into printer queue and was saved to {Environment.NewLine}{filePath}", "OK");
@@ -168,18 +114,46 @@ namespace RadialMaui.ViewModels
             {
                 UIUtil.DisplayPopup("Error", ex.Message, "OK");
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]
         async Task ImageToGCode()
         {
-            await _fileService.ConvertFile("toGCode", _httpClient);
+            try
+            {
+                IsBusy = true;
+                await _fileService.ConvertFile("toGCode", _httpClient);
+            }
+            catch (Exception ex)
+            {
+                UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]
         async Task ImageToEdgesGCode()
         {
-            await _fileService.ConvertFile("toEdgesGCode", _httpClient);
+            try
+            {
+                IsBusy = true;
+                await _fileService.ConvertFile("toEdgesGCode", _httpClient);
+            }
+            catch (Exception ex)
+            {
+                UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]
@@ -221,13 +195,37 @@ namespace RadialMaui.ViewModels
         [RelayCommand]
         async Task ImageToSVG()
         {
-            await _fileService.ConvertFile("toSvg", _httpClient);
+            try
+            {
+                IsBusy = true;
+                await _fileService.ConvertFile("toSvg", _httpClient);
+            }
+            catch (Exception ex)
+            {
+                UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]
         async Task ImageToEdgesSVG()
         {
-            await _fileService.ConvertFile("toEdgesSvg", _httpClient);
+            try
+            {
+                IsBusy = true;
+                await _fileService.ConvertFile("toEdgesSvg", _httpClient);
+            }
+            catch (Exception ex)
+            {
+                UIUtil.DisplayPopup("Error", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }
