@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RadialMaui.Models
 {
-    public partial class ImageToRadialFillFields : ObservableObject
+    public partial class ImageToRadialFillFields : BaseConvertibleModel
     {
         [ObservableProperty]
         public List<string> fileTypePickerItems = new List<string>()
@@ -62,5 +62,8 @@ namespace RadialMaui.Models
 
         [ObservableProperty]
         string? fileName;
+
+        [ObservableProperty]
+        ImageSource? previewImageSource;
     }
 }

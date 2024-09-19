@@ -6,14 +6,16 @@
              xmlns:viewmodel="clr-namespace:RadialMaui.ViewModels"
              x:DataType="viewmodel:SVGControllerViewModel">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="5" Spacing="5">
-            <Frame>
-                <VerticalStackLayout Spacing="20">
-                    <Label Text="SVG to GCode" Style="{StaticResource SubHeadline}"/>
-                    <Button Text="Covert" Command="{Binding SVGToGCodeCommand}"/>
-                </VerticalStackLayout>
-            </Frame>
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid Style="{StaticResource Background}">
+        <ScrollView>
+            <VerticalStackLayout Padding="5" Spacing="5">
+                <Frame>
+                    <VerticalStackLayout Spacing="20">
+                        <Label Text="SVG to GCode" Style="{StaticResource SubHeadline}"/>
+                        <Button Text="Covert" Command="{Binding SVGToGCodeCommand}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

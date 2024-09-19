@@ -5,12 +5,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Style TargetType="TabBar">
-        <Setter Property="Shell.TabBarBackgroundColor"
-            Value="{StaticResource Bg100}" />
-        <Setter Property="Shell.TabBarTitleColor"
-            Value="{StaticResource PrimaryDarkText}" />
-        <Setter Property="Shell.TabBarUnselectedColor"
-            Value="{StaticResource SecondaryDarkText}" />
+        <Setter Property="Shell.TabBarBackgroundColor"  Value="{AppThemeBinding Light={StaticResource Bg100}, Dark={StaticResource BgDark100}}" />
+        <Setter Property="Shell.TabBarUnselectedColor"  Value="{AppThemeBinding Light={StaticResource SecondaryText}, Dark={StaticResource SecondaryDarkText}}" />
+        <Setter Property="Shell.TabBarForegroundColor"  Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryDarkText}}" />
+        <Setter Property="Shell.TabBarTitleColor"       Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryDarkText}}" />
+    </Style>
+    
+    <Style TargetType="Grid" x:Key="Background">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Bg100}, Dark={StaticResource BgDark100}}" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="MainFrameCard">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Bg200}, Dark={StaticResource BgDark200}}" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="SecondaryCardFrame">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource SecondaryText}, Dark={StaticResource SecondaryDarkText}}" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="SecondaryButton">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryDarkText}}" />
     </Style>
     
     <FontImage x:Key="IconOne"
@@ -39,7 +55,7 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource PrimaryDarkText}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
@@ -151,7 +167,7 @@
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Bg200}, Dark={StaticResource Bg200}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
 
     <Style TargetType="ImageButton">

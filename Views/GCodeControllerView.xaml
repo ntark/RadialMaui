@@ -6,10 +6,10 @@
              xmlns:viewmodel="clr-namespace:RadialMaui.ViewModels"
              x:DataType="viewmodel:GCodeControllerViewModel">
 
-    <Grid BackgroundColor="{StaticResource Bg100}">
+    <Grid Style="{StaticResource Background}">
         <ScrollView>
             <VerticalStackLayout Padding="5" Spacing="5">
-                <Frame>
+                <Frame Style="{StaticResource MainFrameCard}">
                     <VerticalStackLayout Spacing="20">
                         <Label Text="Draw state" Style="{StaticResource Headline}"/>
                         <Grid ColumnDefinitions="0.5*, 0.5*"
@@ -27,7 +27,7 @@
 
                             <Frame Grid.Column="1"
                                    Padding="5"
-                                   BackgroundColor="{StaticResource SecondaryDark100}">
+                                   Style="{StaticResource SecondaryCardFrame}">
                                 <Label Text="{Binding Status}" FontSize="25"
                                        VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                             </Frame>
@@ -36,7 +36,7 @@
                         </Grid>
                     </VerticalStackLayout>
                 </Frame>
-                <Frame>
+                <Frame Style="{StaticResource MainFrameCard}">
                     <VerticalStackLayout Spacing="20">
                         <Grid ColumnDefinitions="0.3*, 0.7*"
                                   RowDefinitions="1*, 1*, 1*, 1*, 1*"
@@ -51,15 +51,15 @@
                             <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="2"/>
                             <Entry Text="{Binding RadialToXy.AngleSteps}" Placeholder="{Binding RadialToXy.AngleStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="2"/>
 
-                            <Button Text="Pick file" BackgroundColor="{StaticResource SecondaryDark200}" Command="{Binding PickFileRadialToXyCommand}" Grid.Column="0" Grid.Row="3" />
+                            <Button Text="Pick file" Style="{StaticResource SecondaryButton}" Command="{Binding PickFileRadialToXyCommand}" Grid.Column="0" Grid.Row="3" />
                             <Label Text="{Binding RadialToXy.FileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="3"/>
 
-                            <Button Text="Execute" Command ="{Binding RadialToXYCommand}" Grid.ColumnSpan="2" Grid.Row="4" />
+                            <Button Text="Execute" Command ="{Binding RadialToXYCommand}" IsEnabled="{Binding RadialToXy.ConvertButtonEnabled}" Grid.ColumnSpan="2" Grid.Row="4" />
                         </Grid>
                     </VerticalStackLayout>
                 </Frame>
 
-                <Frame>
+                <Frame Style="{StaticResource MainFrameCard}">
                     <VerticalStackLayout Spacing="20">
                         <Grid ColumnDefinitions="0.3*, 0.7*"
                                   RowDefinitions="1*, 1*, 1*, 1*, 1*, 1*"
@@ -77,21 +77,21 @@
                             <Label Text="Angle Steps" VerticalTextAlignment="Center" FontSize="15" Grid.Column="0" Grid.Row="3"/>
                             <Entry Text="{Binding XyToRadial.AngleSteps}" Placeholder="{Binding XyToRadial.AngleStepsDefault}" Keyboard="Numeric" Grid.Column="1" Grid.Row="3"/>
 
-                            <Button Text="Pick file" BackgroundColor="{StaticResource SecondaryDark200}" Command="{Binding PickFileXyToRadialCommand}" Grid.Column="0" Grid.Row="4" />
+                            <Button Text="Pick file" Style="{StaticResource SecondaryButton}" Command="{Binding PickFileXyToRadialCommand}" Grid.Column="0" Grid.Row="4" />
                             <Label Text="{Binding XyToRadial.FileName}" VerticalTextAlignment="Center" FontSize="15" Grid.Column="1" Grid.Row="4"/>
 
-                            <Button Text="Execute" Command ="{Binding XYToRadialCommand}" Grid.ColumnSpan="2" Grid.Row="5" />
+                            <Button Text="Execute" Command ="{Binding XYToRadialCommand}" IsEnabled="{Binding XyToRadial.ConvertButtonEnabled}" Grid.ColumnSpan="2" Grid.Row="5" />
                         </Grid>
                     </VerticalStackLayout>
                 </Frame>
-                <Frame>
+                <Frame Style="{StaticResource MainFrameCard}">
                     <VerticalStackLayout Spacing="20">
                         <Label Text="GCode Preview" Style="{StaticResource Headline}"/>
                         <Image Source="{Binding PreviewImageSource}" />
                         <Button Text="{Binding GCodePreviewButtonText}" Command="{Binding GCodePreviewButtonCommand}"/>
                     </VerticalStackLayout>
                 </Frame>
-                <Frame>
+                <Frame Style="{StaticResource MainFrameCard}">
                     <VerticalStackLayout Spacing="20">
                         <Label Text="Check Latest" Style="{StaticResource Headline}"/>
                         <Button Text="Check!" Grid.Column="0" Command="{Binding FetchLatestCommand}"/>

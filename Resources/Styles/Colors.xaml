@@ -6,22 +6,39 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#2E8B57</Color>
-    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#e0e0e0</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <!--light mode-->
+    <Color x:Key="Primary">#d4eaf7</Color>
+    <Color x:Key="Primary200">#b6ccd8</Color>
+    <Color x:Key="Primary300">#3b3c3d</Color>
 
+    <Color x:Key="Secondary">#71c4ef</Color>
+    <Color x:Key="Secondary200">#00668c</Color>
+
+    <Color x:Key="PrimaryText">#1d1c1c</Color>
+    <Color x:Key="SecondaryText">#313d44</Color>
+
+    <Color x:Key="Bg100">#fffefb</Color>
+    <Color x:Key="Bg200">#f5f4f1</Color>
+    <Color x:Key="Bg300">#cccbc8</Color>
+
+    <Color x:Key="Tertiary">#2B0B98</Color>
+    
+    <!--dark mode-->
+    <Color x:Key="PrimaryDark">#2E8B57</Color>
     <Color x:Key="PrimaryDark200">#61bc84</Color>
     <Color x:Key="PrimaryDark300">#c6ffe6</Color>
 
-    <Color x:Key="SecondaryDark100">#8FBC8F</Color>
+    <Color x:Key="SecondaryDark">#8FBC8F</Color>
     <Color x:Key="SecondaryDark200">#345e37</Color>
     
-    <Color x:Key="Bg100">#1E1E1E</Color>
-    <Color x:Key="Bg200">#2d2d2d</Color>
-    <Color x:Key="Bg300">#454545</Color>
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+    <Color x:Key="SecondaryDarkText">#e0e0e0</Color>
+    
+    <Color x:Key="BgDark100">#1E1E1E</Color>
+    <Color x:Key="BgDark200">#2d2d2d</Color>
+    <Color x:Key="BgDark300">#454545</Color>
+    
+    <!--end-->
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

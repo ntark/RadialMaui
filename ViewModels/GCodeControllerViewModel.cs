@@ -165,6 +165,7 @@ namespace RadialMaui.ViewModels
 
                 RadialToXyFileResult = result;
                 RadialToXy.FileName = fileName;
+                RadialToXy.ConvertButtonEnabled = true;
             }
             catch (Exception ex)
             {
@@ -236,6 +237,7 @@ namespace RadialMaui.ViewModels
 
                 XyToRadialFileResult = result;
                 XyToRadial.FileName = fileName;
+                XyToRadial.ConvertButtonEnabled = true;
             }
             catch (Exception ex)
             {

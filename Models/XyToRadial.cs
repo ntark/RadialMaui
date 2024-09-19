@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RadialMaui.Models
 {
-    public partial class XyToRadialFields : ObservableObject
+    public partial class XyToRadialFields : BaseConvertibleModel
     {
         public string MaxDistanceDefault => "0.1";
         public string RadialStepsDefault => "-3500";

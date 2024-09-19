@@ -23,9 +23,6 @@ namespace RadialMaui.ViewModels
         ImageToRadialFillFields imageToRadialFill = new ImageToRadialFillFields();
 
         [ObservableProperty]
-        ImageSource? previewImageSource;
-
-        [ObservableProperty]
         ImageSource? edgesPreviewImageSource;
 
         public ImageControllerViewModel(HttpClient httpClient, IFileService fileService)
@@ -52,6 +49,7 @@ namespace RadialMaui.ViewModels
 
                 PickedFileForRadialFillResult = result;
                 ImageToRadialFill.FileName = fileName;
+                ImageToRadialFill.ConvertButtonEnabled = true;
             }
             catch (Exception ex)
             {
@@ -101,7 +99,7 @@ namespace RadialMaui.ViewModels
                     else
                     {
                         var bytes = await response.Content.ReadAsByteArrayAsync();
-                        PreviewImageSource = ImageSource.FromStream(() => new MemoryStream(bytes));
+                        ImageToRadialFill.PreviewImageSource = ImageSource.FromStream(() => new MemoryStream(bytes));
                     }
                 }
                 else

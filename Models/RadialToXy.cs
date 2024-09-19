@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RadialMaui.Models
 {
-    public partial class RadialToXyFields : ObservableObject
+    public partial class RadialToXyFields : BaseConvertibleModel
     {
         public string RadialStepsDefault => "-3500";
         public string AngleStepsDefault => "27800";
